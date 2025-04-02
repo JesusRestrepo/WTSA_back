@@ -362,3 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Perseo.Web/storage
+
+Ditransa.Api\appsettings.json
+Ditransa.Api\appsettings.Development.json
