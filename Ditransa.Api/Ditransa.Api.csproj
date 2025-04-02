@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Templates\Clientes\PqrsCreated.html" />
+    <Content Remove="wwwroot\Templates\CustomerAdmin\CustomerAdminMailTemplate.html" />
+    <Content Remove="wwwroot\Templates\CustomerCreationMailTemplate.html" />
+    <Content Remove="wwwroot\Templates\TransporterCreationMailTemplate.html" />
+    <Content Remove="wwwroot\Templates\VehicleInspectionMailTemplate.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\Templates\Transporter\TransporterCreationMailTemplate.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.14" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.64.1" />
+    <PackageReference Include="Microsoft.PowerBI.Api" Version="4.20.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.0" />
+    <PackageReference Include="Twilio" Version="7.6.0" />
+    <PackageReference Include="ClosedXML" Version="0.95.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ditransa.Application\Ditransa.Application.csproj" />
+    <ProjectReference Include="..\Ditransa.Infrastructure\Ditransa.Infrastructure.csproj" />
+    <ProjectReference Include="..\Ditransa.Persistence\Ditransa.Persistence.csproj" />
+    <ProjectReference Include="..\Ditransa.Shared\Ditransa.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Templates\Clientes\PqrsCreated.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Templates\CustomerAdmin\CustomerAdminMailTemplate.html" />
+    <None Include="wwwroot\Templates\VehicleInspection\VehicleInspectionMailTemplate.html" />
+    <None Include="wwwroot\Templates\CustomerCreationMailTemplate.html" />
+  </ItemGroup>
+
+</Project>

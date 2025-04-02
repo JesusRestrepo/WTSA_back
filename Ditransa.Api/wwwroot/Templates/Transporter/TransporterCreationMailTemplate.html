@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+            table th, table td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+
+            table th {
+                background-color: #f4f4f4;
+                color: #333;
+            }
+
+        .footer {
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Creación de Transportador</h2>
+        <p>Buenos días, se ha creado un transportador con los siguientes datos:</p>
+
+        <table>
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+            </tr>
+            <tr><td>Fecha de petición</td><td>{{RequestDate}}</td></tr>
+            <tr><td>Correo Electrónico</td><td>{{Email}}</td></tr>
+            <tr><td>Nombre del cliente</td><td>{{CustomerName}}</td></tr>
+            <tr><td>Producto</td><td>{{Product}}</td></tr>
+            <tr><td>Valor de mercancía</td><td>{{MerchandiseValue}}</td></tr>
+            <tr><td>Vehículo nuevo</td><td>{{VehicleIsNew}}</td></tr>
+            <tr><td>Placa actual</td><td>{{CurrentPlate}}</td></tr>
+            <tr><td>Activo</td><td>{{DriverIsActive}}</td></tr>
+            <tr><td>Placa activa</td><td>{{ActivePlate}}</td></tr>
+            <tr><td>Origen</td><td>{{Origin}}</td></tr>
+            <tr><td>Destino</td><td>{{Destination}}</td></tr>
+            <tr><td>Modelo</td><td>{{Model}}</td></tr>
+            <tr><td>Repotenciado</td><td>{{Repowered}}</td></tr>
+            <tr><td>GPS</td><td>{{GPS}}</td></tr>
+        </table>
+
+        <h3>Referencias del Transportador</h3>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Relación</th>
+            </tr>
+            {{TransporterReferences}}
+        </table>
+
+        <h3>Conductor - Tenedor</h3>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Identificación</th>
+                <th>Fecha de Expedición</th>
+                <th>Teléfono</th>
+                <th>Teléfono Opcional</th>
+                <th>Relación</th>
+            </tr>
+            {{TransporterRelations}}
+        </table>
+
+        <p class="footer">Si tiene alguna pregunta, no dude en contactarnos.</p>
+    </div>
+</body>
+</html>

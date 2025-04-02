@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #3498db;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .btn:hover {
+                background-color: #2980b9;
+            }
+
+        .footer {
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Notificación de Registro de Cliente</h2>
+        <br>
+        <p>Le informamos que el registro de un nuevo cliente se ha completado exitosamente. A continuación, encontrará un enlace para acceder a una vista detallada de los datos del cliente:</p>
+
+        <a href="{{CustomerDetailsLink}}" class="btn">Ver Datos del Cliente</a>
+
+        <p>Si necesita más información o tiene alguna pregunta, no dude en ponerse en contacto con nosotros.</p>
+
+        <p class="footer">Gracias por su atención y por su colaboración.</p>
+    </div>
+</body>
+</html>

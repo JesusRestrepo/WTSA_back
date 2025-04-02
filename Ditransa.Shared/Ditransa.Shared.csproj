@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Templates\CreateUser.html" />
+    <None Remove="Templates\NewCustomer.html" />
+    <None Remove="Templates\RecoveryPassword.html" />
+    <None Remove="Templates\TransporterCreationMailTemplate.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\NewCustomer.html" />
+    <EmbeddedResource Include="Templates\CreateUser.html" />
+    <EmbeddedResource Include="Templates\RecoveryPassword.html" />
+    <EmbeddedResource Include="Templates\TransporterCreationMailTemplate.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.PowerBI.Api" Version="4.20.0" />
+  </ItemGroup>
+
+</Project>

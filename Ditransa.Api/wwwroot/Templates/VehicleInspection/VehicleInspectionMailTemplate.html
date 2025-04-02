@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+            table th, table td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+
+            table th {
+                background-color: #f4f4f4;
+                color: #333;
+            }
+
+        .footer {
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Resultado de la Inspección Vehicular</h2>
+        <p>Buenos días,</p>
+        <p>Se ha completado una inspección vehicular con los siguientes resultados:</p>
+
+        <table class="info-table">
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+            </tr>
+            <tr><td>Fecha de inspección</td><td>{{RequestDate}}</td></tr>
+            <tr><td>Nombre</td><td>{{Name}}</td></tr>
+            <tr><td>Cédula</td><td>{{Identification}}</td></tr>
+            <tr><td>Teléfono</td><td>{{Phone}}</td></tr>
+            <tr><td>Nombre del cliente</td><td>{{CustomerName}}</td></tr>
+            <tr><td>Ciudad</td><td>{{City}}</td></tr>
+            <tr><td>Origen</td><td>{{Origin}}</td></tr>
+            <tr><td>Destino</td><td>{{Destination}}</td></tr>
+            <tr><td>Linea</td><td>{{Line}}</td></tr>
+            <tr><td>Placa</td><td>{{Plate}}</td></tr>
+            <tr><td>Placa del trailer</td><td>{{TrailerPlate}}</td></tr>
+            <tr><td>Nombre del supervisor</td><td>{{SupervisorName}}</td></tr>
+            <tr><td>Cédula del supervisor</td><td>{{SupervisorIdentification}}</td></tr>
+        </table>
+
+        <table class="results-table">
+            <tr>
+                <th>Pregunta</th>
+                <th>Respuesta</th>
+                <th>Observacion - Fecha vencimiento</th>
+            </tr>
+            {{VehicleInspectionResults}}
+        </table>
+
+        <p class="footer">Si tiene alguna pregunta, no dude en contactarnos.</p>
+    </div>
+</body>
+</html>
