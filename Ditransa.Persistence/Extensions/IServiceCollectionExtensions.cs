@@ -1,12 +1,9 @@
 ﻿using Ditransa.Application.Interfaces.Repositories;
-using Ditransa.Application.Interfaces.Repositories.Clientes;
 using Ditransa.Persistence.Contexts;
 using Ditransa.Persistence.Repositories;
-using Ditransa.Persistence.Repositories.Clientes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NavegacionClientesRepository = Ditransa.Persistence.Repositories.Clientes.NavegacionClientesRepository;
 
 namespace Ditransa.Persistence.Extensions
 {
@@ -50,7 +47,6 @@ namespace Ditransa.Persistence.Extensions
         {
             services
                 .AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork))
-                .AddTransient(typeof(IUnitOfWorkClientes), typeof(UnitOfWorkClientes))
                 .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
                 //.AddTransient<IZoneRepository, ZoneRepository>()
                 //.AddTransient<IEstadoCarteraClientesRepository, EstadoCarteraRepository>()

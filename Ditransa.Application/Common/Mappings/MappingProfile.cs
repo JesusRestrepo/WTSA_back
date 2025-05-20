@@ -1,5 +1,4 @@
-﻿using Ditransa.Domain.Entities;
-using Ditransa.Shared.Enums;
+﻿using Ditransa.Shared.Enums;
 using System.Reflection;
 
 namespace Ditransa.Application.Common.Mappings

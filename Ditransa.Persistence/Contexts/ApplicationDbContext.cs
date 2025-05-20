@@ -1,7 +1,5 @@
 ﻿using Ditransa.Domain.Common;
 using Ditransa.Domain.Common.Interfaces;
-using Ditransa.Domain.Entities;
-using Ditransa.Domain.Entities.Clientes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Reflection;

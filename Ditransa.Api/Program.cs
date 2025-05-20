@@ -68,13 +68,13 @@ builder.Services.AddSingleton(mapper);
 
 builder.Services.AddAuthorization(options =>
 {
-    var optionRepository = builder.Services.BuildServiceProvider().GetService<IOptionRepository>();
-    var optionsList = optionRepository.GetAllAsync().GetAwaiter().GetResult().Where(c => !string.IsNullOrEmpty(c.Code)).ToList();
+    //var optionRepository = builder.Services.BuildServiceProvider().GetService<IOptionRepository>();
+    //var optionsList = optionRepository.GetAllAsync().GetAwaiter().GetResult().Where(c => !string.IsNullOrEmpty(c.Code)).ToList();
 
-    foreach (var item in optionsList)
-    {
-        options.AddPolicy(item.Code, policy => policy.RequireClaim(item.Code));
-    }
+    //foreach (var item in optionsList)
+    //{
+    //    options.AddPolicy(item.Code, policy => policy.RequireClaim(item.Code));
+    //}
 });
 
 var app = builder.Build();
