@@ -8,11 +8,16 @@ namespace Ditransa.Api.Controllers
     [Route("[controller]/[action]")]
     public class VerifyConectionController : ControllerBase
     {
-        [AllowAnonymous]
+        private readonly ILogger<VerifyConectionController> _logger;
+        public VerifyConectionController(ILogger<VerifyConectionController> logger)
+        {
+            _logger = logger;
+        }
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult VerifyConection()
         {
-            return Ok("Connection is OK");
+            return Ok(new { dataObject = "Hola Mundo" });
         }
     }
 }

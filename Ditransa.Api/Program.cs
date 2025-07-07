@@ -1,4 +1,5 @@
 using AutoMapper;
+using Ditransa.Api.Common;
 using Ditransa.Application.Common.Mappings;
 using Ditransa.Application.Extensions;
 using Ditransa.Application.Interfaces.Repositories;
@@ -6,6 +7,7 @@ using Ditransa.Infrastructure.Extensions;
 using Ditransa.Persistence.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Reflection;
 using System.Text;
 
@@ -18,7 +20,11 @@ builder.Services.AddPersistenceLayer(builder.Configuration);
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.AddHttpClient();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    // Registrar el filtro global
+    options.Filters.Add<ApiResponseWrapperFilter>();
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -76,7 +82,39 @@ builder.Services.AddAuthorization(options =>
     //    options.AddPolicy(item.Code, policy => policy.RequireClaim(item.Code));
     //}
 });
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
 
+    .WriteTo.Console()
+
+    // Archivo SOLO para lógica de negocio (Information & Warning)
+    .WriteTo.Logger(lc => lc
+        .Filter.ByIncludingOnly(le =>
+            le.Level == Serilog.Events.LogEventLevel.Information ||
+            le.Level == Serilog.Events.LogEventLevel.Warning
+        )
+        .WriteTo.File(
+            "Logs/business-log.txt",
+            rollingInterval: RollingInterval.Infinite
+        )
+    )
+
+    // Archivo SOLO para errores
+    .WriteTo.Logger(lc => lc
+        .Filter.ByIncludingOnly(le =>
+            le.Level == Serilog.Events.LogEventLevel.Error ||
+            le.Level == Serilog.Events.LogEventLevel.Fatal
+        )
+        .WriteTo.File(
+            "Logs/error-log.txt",
+            rollingInterval: RollingInterval.Infinite
+        )
+    )
+
+    .CreateLogger();
+
+
+builder.Host.UseSerilog();
 var app = builder.Build();
 
 app.UseStaticFiles();
