@@ -1,5 +1,6 @@
 using AutoMapper;
 using Ditransa.Api.Common;
+using Ditransa.Api.Middlewares;
 using Ditransa.Application.Common.Mappings;
 using Ditransa.Application.Extensions;
 using Ditransa.Application.Interfaces.Repositories;
@@ -10,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,7 @@ builder.Services.AddControllers(options =>
     // Registrar el filtro global
     options.Filters.Add<ApiResponseWrapperFilter>();
 });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -51,6 +55,37 @@ builder.Services.AddAuthentication(x =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtBearer").GetSection("SecretKey").Value!)),
         ClockSkew = TimeSpan.Zero
     };
+});
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = 429;
+    options.OnRejected = (context, cancellationToken) =>
+    {
+        context.HttpContext.Response.StatusCode = 429;
+        context.HttpContext.Response.ContentType = "application/json";
+        context.HttpContext.Response.Headers["Retry-After"] = "180";
+
+        var responseObject = new
+        {
+            message = "Demasiadas solicitudes. Intenta nuevamente en unos minutos."
+        };
+
+        string json = JsonSerializer.Serialize(responseObject);
+
+        return new ValueTask(context.HttpContext.Response.WriteAsync(json, cancellationToken));
+    };
+
+    options.AddPolicy("LoginPolicy", httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "anon",
+            factory: key => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 30,
+                Window = TimeSpan.FromMinutes(3),
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 0
+            }));
 });
 
 builder.Services.AddCors(options =>
@@ -129,6 +164,10 @@ if (app.Environment.IsDevelopment())
 app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
+
+app.UseRateLimiter();
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseAuthorization();
 
