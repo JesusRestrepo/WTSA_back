@@ -364,3 +364,5 @@ FodyWeavers.xsd
 /Perseo.Web/storage
 
 Ditransa.Api/appsettings.Development.json
+Ditransa.Api/appsettings.json
+Ditransa.Infrastructure/Services/Clientes/AccessTokenPBI.cs
