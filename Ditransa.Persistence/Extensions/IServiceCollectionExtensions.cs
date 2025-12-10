@@ -1,6 +1,16 @@
 ﻿using Ditransa.Application.Interfaces.Repositories;
+using Ditransa.Application.Interfaces.Repositories.Evidences;
+using Ditransa.Application.Interfaces.Repositories.Inspections;
+using Ditransa.Application.Interfaces.Repositories.Menu;
+using Ditransa.Application.Interfaces.Repositories.MenuRol;
+using Ditransa.Application.Interfaces.Repositories.Users;
 using Ditransa.Persistence.Contexts;
 using Ditransa.Persistence.Repositories;
+using Ditransa.Persistence.Repositories.Evidences;
+using Ditransa.Persistence.Repositories.Inspections;
+using Ditransa.Persistence.Repositories.Menu;
+using Ditransa.Persistence.Repositories.MenuRol;
+using Ditransa.Persistence.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,8 +58,11 @@ namespace Ditransa.Persistence.Extensions
             services
                 .AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork))
                 .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
-                //.AddTransient<IZoneRepository, ZoneRepository>()
-                //.AddTransient<IEstadoCarteraClientesRepository, EstadoCarteraRepository>()
+                .AddTransient<IUserRepository, UserRepository>()
+                .AddTransient<IMenuRepository, MenuRepository>()
+                .AddTransient<IMenuRolRepository, MenuRolRepository>()
+                .AddTransient<IInspectionRepository, InspectionRepository>()
+                .AddTransient<IEvidencesRepository, EvidencesRepository>()
                 ;
         }
     }

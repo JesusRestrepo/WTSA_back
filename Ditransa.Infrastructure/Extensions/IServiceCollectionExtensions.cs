@@ -1,7 +1,9 @@
 ﻿using Ditransa.Application.Interfaces;
+using Ditransa.Application.Interfaces.Authentication;
 using Ditransa.Domain.Common;
 using Ditransa.Domain.Common.Interfaces;
 using Ditransa.Infrastructure.Services;
+using Ditransa.Infrastructure.Services.Authentication;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +24,7 @@ namespace Ditransa.Infrastructure.Extensions
                 .AddTransient<IDomainEventDispatcher, DomainEventDispatcher>()
                 .AddTransient<IDateTimeService, DateTimeService>()
                 .AddTransient<IMailService, GraphMailService>()
+                .AddTransient<IAuthenticationService, AuthenticationService>()
                 ;
         }
     }

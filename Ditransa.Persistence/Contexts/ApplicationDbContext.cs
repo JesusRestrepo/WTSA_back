@@ -1,5 +1,6 @@
 ﻿using Ditransa.Domain.Common;
 using Ditransa.Domain.Common.Interfaces;
+using Ditransa.Domain.Entities.WTSA;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Reflection;
@@ -17,13 +18,21 @@ namespace Ditransa.Persistence.Contexts
             _dispatcher = dispatcher;
         }
 
-        //public DbSet<Zone> Zones => Set<Zone>();
+        public DbSet<User> User => Set<User>();
+        public DbSet<MenuRole> MenuRole => Set<MenuRole>();
+        public DbSet<Role> Role => Set<Role>();
+        public DbSet<Inspection> Inspection => Set<Inspection>();
+        public DbSet<Evidence> Evidence => Set<Evidence>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Zone>().ToTable("Zones", "dbo");
+            modelBuilder.Entity<User>().ToTable("Users", "dbo");
+            modelBuilder.Entity<MenuRole>().ToTable("MenuRoles", "dbo");
+            modelBuilder.Entity<Role>().ToTable("Roles", "dbo");
+            modelBuilder.Entity<Inspection>().ToTable("Inspection", "dbo");
+            modelBuilder.Entity<Evidence>().ToTable("Evidences", "dbo");
 
             // Configuración de llaves primarias compuestas
 
@@ -33,6 +42,7 @@ namespace Ditransa.Persistence.Contexts
             //    .HasForeignKey(u => u.EmpresaNit) 
             //    .HasPrincipalKey(c => c.nit);
 
+            modelBuilder.Entity<MenuRole>().Ignore("UserId");
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }

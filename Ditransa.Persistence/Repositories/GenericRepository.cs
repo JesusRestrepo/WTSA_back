@@ -60,6 +60,11 @@ namespace Ditransa.Persistence.Repositories
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
+        public async Task<T> GetByInspectionIdAsync(Guid id)
+        {
+            return await _dbContext.Set<T>().FindAsync(id);
+        }
+
         public async Task<int> Save()
         {
             return await _dbContext.SaveChangesAsync();

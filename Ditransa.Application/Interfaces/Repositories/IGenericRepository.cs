@@ -5,6 +5,7 @@
         IQueryable<T> Entities { get; }
 
         Task<T> GetByIdAsync(Guid id);
+        Task<T> GetByInspectionIdAsync(Guid InspectionId);
 
         Task<List<T>> GetAllAsync();
 
